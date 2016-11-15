@@ -1,32 +1,51 @@
 // Chapter 9 of C++ How to Program
-// driver for inheritance hierarchy
-#include <iostream>
-
-using std::cout;
-using std::endl;
-
-#include "vehicle.h"
-#include "taxi.h"
+// truck.cpp
 #include "truck.h"
 
-int main()
+/* Write definition for class Truck's constructor */
+Truck::Truck( double initialFuel)
+:Vehicle(2,16,"black",initialFuel,8)
 {
-   Vehicle car( 2, 6, "blue", 14.6, 3 );
-   Taxi cab( 3.3 );
-   Truck mack( 7.54 );
+	cargo = false;
+	setClassName( "Truck" );
+}
+// function hasCargo definition
+bool Truck::hasCargo() const
+{
+   return cargo;
 
-   mack.setCargo(true);
-   /* Write code to indicate that mack is carrying cargo */
-   cout << car;
-   cout << cab;
-   cout << mack;
+} // end function hasCargo
 
-   /* Write code to print all objects in the Vehicle
-      hierarchy */
+// function setCargo definition
+void Truck::setCargo( bool c ) 
+{
+   cargo = c;
 
-   return 0;
+} // end function setCargo
 
-} // end main
+// function operator<< definition
+ostream &operator<<( ostream &output, const Truck &t )
+{
+   output << t.getClassName() << "\n"
+          << "\tNumber of doors: " 
+          << t.getNumberOfDoors()
+          << "\n\tNumber of cylinders: " 
+          << t.getNumberOfCylinders()
+          << "\n\tTransmission type: " 
+          << t.getTransmissionType()
+          << "\n\tColor: " << t.getColor()
+          << "\n\tFuel level: " 
+          << t.getFuelLevel() << "\n";
+
+   if ( t.cargo )
+      output << "\tThe truck is carrying cargo.\n";
+
+   else
+      output << "\tThe truck is not carrying cargo.\n";
+
+   return output;
+
+} // end function operator<<
 
 /**************************************************************************
  * (C) Copyright 1992-2003 by Deitel & Associates, Inc. and Prentice      *

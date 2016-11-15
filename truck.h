@@ -1,32 +1,23 @@
 // Chapter 9 of C++ How to Program
-// driver for inheritance hierarchy
-#include <iostream>
-
-using std::cout;
-using std::endl;
+// truck.h
+#ifndef TRUCK_H
+#define TRUCK_H
 
 #include "vehicle.h"
-#include "taxi.h"
-#include "truck.h"
 
-int main()
-{
-   Vehicle car( 2, 6, "blue", 14.6, 3 );
-   Taxi cab( 3.3 );
-   Truck mack( 7.54 );
+class Truck:public Vehicle{
+	friend ostream &operator<<( ostream &output, const Truck &t );
+	public:
+		Truck( double );
+		bool hasCargo() const;
+		void setCargo(bool);
 
-   mack.setCargo(true);
-   /* Write code to indicate that mack is carrying cargo */
-   cout << car;
-   cout << cab;
-   cout << mack;
+	private:
+	bool cargo;
+};
+/* Write contents of truck.h, which defines class Truck */
 
-   /* Write code to print all objects in the Vehicle
-      hierarchy */
-
-   return 0;
-
-} // end main
+#endif //TRUCK_H
 
 /**************************************************************************
  * (C) Copyright 1992-2003 by Deitel & Associates, Inc. and Prentice      *
@@ -41,5 +32,4 @@ int main()
  * and publisher shall not be liable in any event for incidental or       *
  * consequential damages in connection with, or arising out of, the       *
  * furnishing, performance, or use of these programs.                     *
- *************************************************************************/
-
+ ********************************************************/

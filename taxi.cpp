@@ -1,32 +1,53 @@
 // Chapter 9 of C++ How to Program
-// driver for inheritance hierarchy
-#include <iostream>
-
-using std::cout;
-using std::endl;
-
-#include "vehicle.h"
+// taxi.cpp
 #include "taxi.h"
-#include "truck.h"
 
-int main()
+// constructor
+Taxi::Taxi( double f )
+   : Vehicle( 4, 6, "yellow", f, 5 )
 {
-   Vehicle car( 2, 6, "blue", 14.6, 3 );
-   Taxi cab( 3.3 );
-   Truck mack( 7.54 );
+   customers = false;
+   setClassName( "Taxi" );
 
-   mack.setCargo(true);
-   /* Write code to indicate that mack is carrying cargo */
-   cout << car;
-   cout << cab;
-   cout << mack;
+} // end class Taxi constructor
 
-   /* Write code to print all objects in the Vehicle
-      hierarchy */
+/* Write definition for setCustomers */
+void Taxi::setCustomers(bool cust){
+	customers=cust;
+}
+/* Write definition for hasCustomers */
+bool Taxi::hasCustomers() const{
+	if(customers){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+// function operator<< definition
+ostream &operator<<( ostream &output, const Taxi &t )
+{
+   output << t.getClassName() << "\n"
+          << "\tNumber of doors: "
+          << t.getNumberOfDoors()
+          << "\n\tNumber of cylinders: "
+          << t.getNumberOfCylinders()
+          << "\n\tTransmission type: "
+          << t.getTransmissionType()
+          << "\n\tColor: " << t.getColor()
+          << "\n\tFuel level: " 
+          << t.getFuelLevel() << "\n";
 
-   return 0;
+   if ( t.hasCustomers())
+      output << "\tThe taxi has passengers.\n";
 
-} // end main
+   else
+      output << "\tThe taxi has no passengers.\n";
+
+   return output;
+
+} // end function operator
+
 
 /**************************************************************************
  * (C) Copyright 1992-2003 by Deitel & Associates, Inc. and Prentice      *
@@ -42,4 +63,3 @@ int main()
  * consequential damages in connection with, or arising out of, the       *
  * furnishing, performance, or use of these programs.                     *
  *************************************************************************/
-

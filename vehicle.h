@@ -1,32 +1,49 @@
 // Chapter 9 of C++ How to Program
-// driver for inheritance hierarchy
+// vehicle.h
+#ifndef VEHICLE_H
+#define VEHICLE_H
+
 #include <iostream>
 
-using std::cout;
-using std::endl;
+using std::ostream;
 
-#include "vehicle.h"
-#include "taxi.h"
-#include "truck.h"
+#include <string>
 
-int main()
-{
-   Vehicle car( 2, 6, "blue", 14.6, 3 );
-   Taxi cab( 3.3 );
-   Truck mack( 7.54 );
+using std::string;
 
-   mack.setCargo(true);
-   /* Write code to indicate that mack is carrying cargo */
-   cout << car;
-   cout << cab;
-   cout << mack;
+// class Vehicle definition
+class Vehicle {
+   friend ostream& operator<<( ostream &, const Vehicle & );
 
-   /* Write code to print all objects in the Vehicle
-      hierarchy */
+public:
+   Vehicle( const int, const int, string, double, const int ); 
+   
+   void setColor( string );
+   string getColor() const;
 
-   return 0;
+   void setFuelLevel( double );
+   double getFuelLevel() const;
 
-} // end main
+   void setClassName( string );
+   string getClassName() const;
+
+   int getTransmissionType() const;
+   int getNumberOfDoors() const;
+   int getNumberOfCylinders() const; 
+
+private:
+
+   int numberOfDoors;
+   int numberOfCylinders;
+   string vehicleColor;
+   double fuelLevel;
+   int transmissionType;
+   string className;
+
+}; // end class Vehicle
+
+#endif // VEHICLE_H
+
 
 /**************************************************************************
  * (C) Copyright 1992-2003 by Deitel & Associates, Inc. and Prentice      *
